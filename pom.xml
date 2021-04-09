@@ -8,13 +8,13 @@
 		<version>2.4.4</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>org.ntutosl</groupId>
-	<artifactId>order_system_backend</artifactId>
+	<groupId>com.example</groupId>
+	<artifactId>rest-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>order_system_backend</name>
-	<description>order system back end code</description>
+	<name>rest-service</name>
+	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>16</java.version>
+		<java.version>1.8</java.version>
 	</properties>
 	<dependencies>
 		<dependency>

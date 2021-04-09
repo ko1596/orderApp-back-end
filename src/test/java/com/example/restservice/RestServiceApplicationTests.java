@@ -1,10 +1,10 @@
-package org.ntutosl.order_system_backend;
+package com.example.restservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class OrderSystemBackendApplicationTests {
+class RestServiceApplicationTests {
 
 	@Test
 	void contextLoads() {
