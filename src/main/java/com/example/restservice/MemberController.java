@@ -49,11 +49,12 @@ public class MemberController {
 
 	@RequestMapping("/login")
 	@ResponseBody
-	public void login(HttpServletRequest request) {
+	public ResponseEntity login(HttpServletRequest request) {
 		userData = new UserData();
 		userData.setID(request.getParameter("account"));
 		userData.setPassword(request.getParameter("password"));
 		memberService.addAccount(userData);
 
+		return new ResponseEntity(HttpStatus.OK);
 	}
 }
