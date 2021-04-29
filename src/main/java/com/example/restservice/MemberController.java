@@ -17,10 +17,10 @@ public class MemberController {
     public String hello(){
     	memberAccount = new MemberAccount();
         System.out.println("new MemberAccount()");
-    	memberAccount.setPassword("12345678");
-    	memberAccount.setEmail("test@gmail.com");
-    	memberAccount.setCellphone("0912345789");
-    	memberAccount.setAddress("台北市");
+    	memberAccount.setPassword("654654");
+    	memberAccount.setEmail("aaa@gmail.com");
+    	memberAccount.setCellphone("0912354678");
+    	memberAccount.setAddress("台中市");
         System.out.println("new MemberAccount add");
     	memberService.addMember(memberAccount);
         System.out.println("query");
