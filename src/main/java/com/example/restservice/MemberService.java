@@ -11,4 +11,7 @@ public class MemberService {
 	public void addMember(MemberAccount memberAccount){
 		memberDao.addMember(memberAccount);
 	}
+	public void addAccount(UserData Data){
+		memberDao.addAccount(Data);
+	}
 }
