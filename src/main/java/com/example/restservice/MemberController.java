@@ -47,14 +47,5 @@ public class MemberController {
 		return sol;
 	}
 
-	@RequestMapping("/login")
-	@ResponseBody
-	public ResponseEntity login(HttpServletRequest request) {
-		userData = new UserData();
-		userData.setID(request.getParameter("account"));
-		userData.setPassword(request.getParameter("password"));
-		memberService.addAccount(userData);
-
-		return new ResponseEntity(HttpStatus.OK);
-	}
+	
 }
