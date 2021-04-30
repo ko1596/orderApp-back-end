@@ -4,11 +4,15 @@ package com.example.restservice;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @RestController
 
@@ -56,5 +60,15 @@ public class MemberController {
 		memberService.addAccount(userData);
 
 		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@Bean
+	public WebMvcConfigurer configurer(){
+		return new WebMvcConfigurer(){
+			@Override
+			public void addCorsMappings(CorsRegistry registry){
+				registry.addMapping("/*").allowedOrigins("https://127.0.0.1:5500");
+			}
+		};
 	}
 }
