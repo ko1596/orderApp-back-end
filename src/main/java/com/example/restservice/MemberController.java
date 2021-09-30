@@ -39,5 +39,17 @@ public class MemberController {
 		return ResponseEntity.status(HttpStatus.OK).body(sol);
 	}
 
+	@RequestMapping("/SignUp")
+	public ResponseEntity login(HttpServletRequest request) {
+		memberAccount = new MemberAccount();
+		memberAccount.setidMember(request.getParameter("account"));
+		memberAccount.setPassword(request.getParameter("password"));
+		memberAccount.setName(request.getParameter("name"));
+		memberAccount.setEmail(request.getParameter("email"));
+		memberAccount.setBirthday(request.getParameter("birthday"));
+		memberAccount.getPhone(request.getParameter("phone"));
+		memberAccount.addAccount(userData);
 
+		return new ResponseEntity(HttpStatus.OK);
+	}
 }
