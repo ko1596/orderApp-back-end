@@ -41,8 +41,8 @@ public class MemberController {
 		memberAccount.setName(request.getParameter("name"));
 		memberAccount.setEmail(request.getParameter("email"));
 		memberAccount.setBirthday(request.getParameter("birthday"));
-		memberAccount.getPhone(request.getParameter("phone"));
-		memberService.addAccount(memberAccount);
+		memberAccount.setPhone(request.getParameter("phone"));
+		memberService.addMember(memberAccount);
 
 		return new ResponseEntity(HttpStatus.OK);
 	}

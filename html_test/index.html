@@ -1,30 +1,96 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Strict//EN">
 <html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet"><!--滾動特效-->
-    <script defer src="https://use.fontawesome.com/releases/v5.0.0/js/all.js"></script>
-    
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
-    <title>GYY.GG | Home</title>
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-auto justify-content-center">
-        <button type="button" class="btn btn-primary">Primary</button>
-      </div>
-    </div>
-  </div>
-  
+    <head>
+        <meta content="text/html; charset=UTF-8" http-equiv="content-type">
+        <script type="text/javascript">
+            window.onload = function() {
+                var xhr = window.XMLHttpRequest && 
+                      (window.location.protocol !== 'file:' 
+                          || !window.ActiveXObject) ?
+                       function() {
+                           return new XMLHttpRequest();
+                       } :
+                       function() {
+                          try {
+                             return new ActiveXObject('Microsoft.XMLHTTP');
+                          } catch(e) {
+                             throw new Error('XMLHttpRequest not supported');
+                          }
+                       };
+                
+                function param(obj) {
+                    var pairs = [];
+                    for(var name in obj) {
+                        var pair = encodeURIComponent(name) + '=' + 
+                                   encodeURIComponent(obj[name]);
+                        pairs.push(pair.replace('/%20/g', '+'));
+                    }
+                    return pairs.join('&');
+                }
+                
+                function ajax(option) {
+                    option.type = option.type || 'GET';
+                    option.header = option.header || {
+                      'Content-Type':'application/x-www-form-urlencoded'};
+                    option.callback = option.callback || function() {};
 
-</body>
-
+                    // 沒有 url，啥事也作不了
+                    if(!option.url) {
+                        return;
+                    }
+                    
+                    var request = xhr();
+                    request.onreadystatechange = function() {
+                        option.callback.call(request, request);
+                    };
+                    
+                    var body = null;
+                    var url = option.url;
+                    if(option.data) {
+                        if(option.type === 'POST') {
+                            body = param(option.data);
+                        }
+                        else {
+                            url = option.url + '?' + param(option.data) 
+                                     + '&time=' + new Date().getTime();
+                        }
+                    }
+                    
+                    request.open(option.type, url);
+                    for(var name in option.header) {
+                        request.setRequestHeader(
+                                name, option.header[name]);
+                    }
+                    request.send(body);
+                }
+                
+                document.getElementById('url').onblur = function() {
+                    ajax({
+                        type: 'POST',
+                        url : 'http://192.168.0.249:8080/api/plus',
+                        data: {url : document.getElementById('url').value},
+                        callback: function(request) {
+                            if(request.readyState === 4) {
+                                if(request.status === 200) {
+                                    var message = '';
+                                    if(request.responseText 
+                                         === 'urlExisted') {
+                                        message = 'URL 已存在';
+                                    }
+                                    document.getElementById('message')
+                                        .innerHTML = message;
+                                }
+                            }
+                        }
+                    });
+                };
+            };
+        </script>        
+    </head>
+    <body>
+        新增書籤：<br>
+        網址：<input id="url" type="text">
+        <span id="message" style="color:red"></span><br>
+        名稱：<input type="text">
+    </body>
 </html>
