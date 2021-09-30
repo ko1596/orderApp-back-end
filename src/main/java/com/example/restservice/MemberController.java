@@ -32,23 +32,17 @@ public class MemberController {
 		return ResponseEntity.status(HttpStatus.OK).body(sol);
 	}
 
-	@PostMapping(value = "/SignUp")
-	// @ResponseBody
-	public ResponseEntity<String> addWord(HttpServletRequest request) {
-		String sol = String.valueOf(Integer.parseInt(request.getParameter("v1"))+Integer.parseInt(request.getParameter("v2")));
-		return ResponseEntity.status(HttpStatus.OK).body(sol);
-	}
 
 	@RequestMapping("/SignUp")
 	public ResponseEntity login(HttpServletRequest request) {
-		memberAccount = new MemberAccount();
+		MemberAccount memberAccount = new MemberAccount();
 		memberAccount.setidMember(request.getParameter("account"));
 		memberAccount.setPassword(request.getParameter("password"));
 		memberAccount.setName(request.getParameter("name"));
 		memberAccount.setEmail(request.getParameter("email"));
 		memberAccount.setBirthday(request.getParameter("birthday"));
 		memberAccount.getPhone(request.getParameter("phone"));
-		memberAccount.addAccount(userData);
+		memberService.addAccount(memberAccount);
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
