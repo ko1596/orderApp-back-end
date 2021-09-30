@@ -31,4 +31,13 @@ public class MemberController {
 		String sol = String.valueOf(Integer.parseInt(request.getParameter("v1"))+Integer.parseInt(request.getParameter("v2")));
 		return ResponseEntity.status(HttpStatus.OK).body(sol);
 	}
+
+	@PostMapping(value = "/SignUp")
+	// @ResponseBody
+	public ResponseEntity<String> addWord(HttpServletRequest request) {
+		String sol = String.valueOf(Integer.parseInt(request.getParameter("v1"))+Integer.parseInt(request.getParameter("v2")));
+		return ResponseEntity.status(HttpStatus.OK).body(sol);
+	}
+
+
 }
