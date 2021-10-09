@@ -1,4 +1,4 @@
-package com.example.restservice.Service;
+package com.example.restservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,4 +15,12 @@ public class MemberDao {
 	  		+ "VALUES (?,?,?,?,?,?)" ,memberAccount.getMemberType(), memberAccount.getName(),
 	  		memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail());
   	}
+
+	//public void LoginMember(MemberAccount memberAccount){
+		//string sql = "SELECT * FROM `user` WHERE `username` = ? and `password` = ?";
+		//jdbcTemplate.execute(sql);
+
+	//}
+
+	
 }

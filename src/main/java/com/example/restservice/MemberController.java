@@ -1,4 +1,4 @@
-package com.example.restservice.Adapter;
+package com.example.restservice;
 
 
 import javax.servlet.http.HttpServletRequest;

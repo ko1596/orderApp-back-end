@@ -1,4 +1,4 @@
-package com.example.restservice.config;
+package com.example.restservice;
 
 import java.util.Arrays;
 
