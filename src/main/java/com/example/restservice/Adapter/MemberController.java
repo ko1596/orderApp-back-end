@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.example.restservice.Adapter;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +36,7 @@ public class MemberController {
 	@RequestMapping("/SignUp")
 	public ResponseEntity login(HttpServletRequest request) {
 		MemberAccount memberAccount = new MemberAccount();
-		memberAccount.setidMember(request.getParameter("account"));
+		memberAccount.setMemberType(request.getParameter("Type"));
 		memberAccount.setPassword(request.getParameter("password"));
 		memberAccount.setName(request.getParameter("name"));
 		memberAccount.setEmail(request.getParameter("email"));

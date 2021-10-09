@@ -1,22 +1,22 @@
-package com.example.restservice;
+package com.example.restservice.Model;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class MemberAccount {
-  private String idMember;
+  private String MemberType;
   private String Name;
   private String password;
   private String Birthday;
   private String Phone;
   private String Email;
   
-  public String getidMember() {
-	return idMember;
+  public String getMemberType() {
+	return MemberType;
   }
   
-  public void setidMember(String idMember) {
-	  this.idMember = idMember;
+  public void setMemberType(String MemberType) {
+	  this.MemberType = MemberType;
   }
   public String getEmail() {
 	return Email;
