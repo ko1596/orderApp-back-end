@@ -31,11 +31,8 @@ public class MemberDao {
 		public String loginmember(Loginmember input)
 		{ 
 			try{
-				String sql=" Select Name from `project_database`.`member` where email=? and password=?";
-				RowMapper<String> rowMapper = new BeanPropertyRowMapper<String>(String.class);
-			    String a = jdbcTemplate.queryForObject(sql ,rowMapper,input.getemail(), input.getPassword()); 
-				System.out.println(a);
-				return a;
+				String sql=" Select idMember from `project_database`.`member` where email=? and password=?";
+				return jdbcTemplate.queryForObject(sql, new Object[]{input.getemail(), input.getPassword()}, String.class);
 			}catch (DataAccessException e){
 				e.printStackTrace();   
 				return null;

@@ -59,8 +59,7 @@ public class MemberController {
 		} catch (LoginErrorException e) {
 			return ResponseEntity.status(HttpStatus.CREATED).body(e);
 		}
-		System.out.println("fuck god\n\n\n\n\n\n");
-		return ResponseEntity.status(HttpStatus.OK).body("kojmjin");
+		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
 }
