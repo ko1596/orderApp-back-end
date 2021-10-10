@@ -11,4 +11,7 @@ public class MemberService {
 	public void addMember(MemberAccount memberAccount){
 		memberDao.addMember(memberAccount);
 	}
+	public String loginMember(Loginmember input)  throws LoginErrorException{
+		return memberDao.loginmember(input);
+	}
 }

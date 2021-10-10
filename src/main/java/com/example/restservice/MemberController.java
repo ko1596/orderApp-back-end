@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
+import com.example.restservice.LoginErrorException;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -34,7 +35,7 @@ public class MemberController {
 
 
 	@RequestMapping("/SignUp")
-	public ResponseEntity login(HttpServletRequest request) {
+	public ResponseEntity SignUp(HttpServletRequest request) {
 		MemberAccount memberAccount = new MemberAccount();
 		memberAccount.setMemberType(request.getParameter("Type"));
 		memberAccount.setPassword(request.getParameter("password"));
@@ -46,4 +47,20 @@ public class MemberController {
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
+
+	@RequestMapping("/Login")
+	public ResponseEntity Login(HttpServletRequest request) {
+		String result;
+		Loginmember loginmember = new Loginmember();
+		loginmember.setemail(request.getParameter("email"));
+		loginmember.setPassword(request.getParameter("password"));
+		try {
+			result = memberService.loginMember(loginmember);
+		} catch (LoginErrorException e) {
+			return ResponseEntity.status(HttpStatus.CREATED).body(e);
+		}
+		System.out.println("fuck god\n\n\n\n\n\n");
+		return ResponseEntity.status(HttpStatus.OK).body("kojmjin");
+	}
+
 }
