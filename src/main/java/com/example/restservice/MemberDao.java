@@ -11,8 +11,12 @@ public class MemberDao {
 	
 	public void addMember(MemberAccount memberAccount){
 		System.out.println("EXCUTE INSERT MEMBER");
-	  jdbcTemplate.update("INSERT INTO `project_database`.`member` (`idMember`, `Name`, `password`, `Birthday`, `Phone`, `Email`)"
-	  		+ "VALUES (?,?,?,?,?,?)",Integer.valueOf(memberAccount.getidMember()), memberAccount.getName(),
-	  		memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail());
+	  jdbcTemplate.update("INSERT INTO `project_database`.`member` (`Name`, `password`, `Birthday`, `Phone`, `Email`)"
+	  		+ "VALUES (?,?,?,?,?)", 
+			memberAccount.getName(),
+	  		memberAccount.getPassword(),
+			memberAccount.getBirthday(),
+			memberAccount.getPhone(),
+			memberAccount.getEmail());
   	}
 }

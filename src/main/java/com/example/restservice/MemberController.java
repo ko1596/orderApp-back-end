@@ -29,6 +29,7 @@ public class MemberController {
 	// @ResponseBody
 	public ResponseEntity<String> addWord(HttpServletRequest request) {
 		String sol = String.valueOf(Integer.parseInt(request.getParameter("v1"))+Integer.parseInt(request.getParameter("v2")));
+		System.out.println(request.getParameter("v1")+"   "+request.getParameter("v2"));
 		return ResponseEntity.status(HttpStatus.OK).body(sol);
 	}
 
@@ -36,7 +37,6 @@ public class MemberController {
 	@RequestMapping("/SignUp")
 	public ResponseEntity login(HttpServletRequest request) {
 		MemberAccount memberAccount = new MemberAccount();
-		memberAccount.setidMember(request.getParameter("account"));
 		memberAccount.setPassword(request.getParameter("password"));
 		memberAccount.setName(request.getParameter("name"));
 		memberAccount.setEmail(request.getParameter("email"));
@@ -46,4 +46,5 @@ public class MemberController {
 
 		return new ResponseEntity(HttpStatus.OK);
 	}
+
 }
