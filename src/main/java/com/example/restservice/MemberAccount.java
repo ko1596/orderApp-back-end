@@ -4,20 +4,12 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberAccount {
-  private String MemberType;
   private String Name;
   private String password;
   private String Birthday;
   private String Phone;
   private String Email;
-  
-  public String getMemberType() {
-	return MemberType;
-  }
-  
-  public void setMemberType(String MemberType) {
-	  this.MemberType = MemberType;
-  }
+
   public String getEmail() {
 	return Email;
   }

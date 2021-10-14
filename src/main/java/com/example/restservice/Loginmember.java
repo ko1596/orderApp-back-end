@@ -1,5 +1,7 @@
 package com.example.restservice;
+import org.springframework.stereotype.Component;
 
+@Component
 public class Loginmember {
     private String email;
     private String password;
