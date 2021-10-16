@@ -43,8 +43,9 @@ public class MemberDao {
 		}		
 	} 
 
-	public void AddSeller(String id){
-		jdbcTemplate.update("INSERT INTO `project_database`.`Seller` (`idMember`)" + "VALUES (?)" , id);
+	public void AddSeller(Seller seller){
+		jdbcTemplate.update("INSERT INTO `project_database`.`Seller` (`idMember` , `Name` , `Phone` , `Description`)" + "VALUES (?,?,?,?)" , 
+		seller.getidMember(),seller.getName(),seller.getPhone(),seller.getDescription());
 	}
 
 	public String Findseller(String memberid)

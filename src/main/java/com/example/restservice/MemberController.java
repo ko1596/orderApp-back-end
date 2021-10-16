@@ -39,29 +39,26 @@ public class MemberController {
 	}
 
 
-	@RequestMapping("/SignUp")
+	@RequestMapping("/SignUp_Member")
 	public ResponseEntity SignUp(HttpServletRequest request) {
 		MemberAccount memberAccount = new MemberAccount();
-		String Role = request.getParameter("Type");
 		memberAccount.setPassword(request.getParameter("password"));
 		memberAccount.setName(request.getParameter("name"));
 		memberAccount.setEmail(request.getParameter("email"));
 		memberAccount.setBirthday(request.getParameter("birthday"));
 		memberAccount.setPhone(request.getParameter("phone"));
 		memberService.addMember(memberAccount);
-        if(Role.equals("Seller")){
-			String id;
-			Loginmember loginmember = new Loginmember();
-			loginmember.setemail(request.getParameter("email"));
-			loginmember.setPassword(request.getParameter("password"));
-			try {
-				id = memberService.loginMember(loginmember);
-				memberService.AddSeller(id);
-			} 
-			catch (LoginErrorException e) {
-				return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
-			}
-		}
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@RequestMapping("/SignUp_Seller")
+	public ResponseEntity SignUp_Seller(HttpServletRequest request) {
+		Seller seller = new Seller();
+		seller.setidMember(Integer.parseInt(request.getParameter("idMember")));
+		seller.setName(request.getParameter("name"));
+		seller.setPhone(Integer.parseInt(request.getParameter("phone")));
+		seller.setDescription(request.getParameter("Description"));
+		memberService.AddSeller(seller);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 

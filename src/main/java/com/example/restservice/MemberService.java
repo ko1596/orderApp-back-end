@@ -22,8 +22,8 @@ public class MemberService {
 	public void AddProduct(AddProduct addProduct){
         memberDao.AddProduct(addProduct);
 	}
-	public void AddSeller(String id){
-		memberDao.AddSeller(id);
+	public void AddSeller(Seller seller){
+		memberDao.AddSeller(seller);
 	}
 
 	public String Findseller(String memberid){
