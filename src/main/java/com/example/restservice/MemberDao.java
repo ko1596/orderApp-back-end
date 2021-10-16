@@ -26,7 +26,6 @@ public class MemberDao {
   	}
 
 	public void AddProduct(AddProduct addProduct){	
-    	System.out.println("add product");
 		jdbcTemplate.update("INSERT INTO `project_database`.`product` (`Sellerid` , `Price`, `Name`, `Photo`, `Description`, `Status`, `Tag`)"
 	  	+ "VALUES (?,?,?,?,?,?,?)" ,addProduct.getSellerid(),addProduct.getPrice(), addProduct.getName(),
 	  	addProduct.getPhoto(),addProduct.getDescription(),addProduct.getStatus(),addProduct.getTag());
@@ -63,8 +62,8 @@ public class MemberDao {
 	{
 		String sql = "select * from `project_database`.`product`  where Sellerid=" + sellerid;
 		return jdbcTemplate.query(sql, new ProductRowMapper());
-
 	}
+
 
 
 

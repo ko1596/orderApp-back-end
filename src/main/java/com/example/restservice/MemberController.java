@@ -3,6 +3,8 @@ package com.example.restservice;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.gson.Gson;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -91,7 +93,6 @@ public class MemberController {
 		addProduct.setStatus(request.getParameter("Status"));
 		addProduct.setTag(request.getParameter("Tag"));
 		memberService.AddProduct(addProduct);
-		System.out.println(Sellerid);
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -99,16 +100,13 @@ public class MemberController {
 	public ResponseEntity PostProduct(HttpServletRequest request) {
 		String memberID = request.getParameter("memberID");
 		String Sellerid = memberService.Findseller(memberID);
-		System.out.println(memberID);
-		System.out.println(Sellerid);
 		List<AddProduct> collector = new ArrayList<>();
 		collector = memberService.FindProduct(Sellerid);
-		for(int i =0 ; i < collector.size() ; i++){
-			System.out.println(collector.get(i).getName());
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body("GOOD");
+		String json = new Gson().toJson(collector);
+		return ResponseEntity.status(HttpStatus.OK).body(json);
 	}
+
+
 
 
 }
