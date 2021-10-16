@@ -18,6 +18,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -68,18 +69,15 @@ public class MemberController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping("/Login")
-	public ResponseEntity Login(HttpServletRequest request) {
+	@PostMapping("/Login")
+	public ResponseEntity Login(@RequestBody Loginmember loginmember) {
 		String result;
-		Loginmember loginmember = new Loginmember();
-		loginmember.setemail(request.getParameter("email"));
-		loginmember.setPassword(request.getParameter("password"));
 		try {
 			result = memberService.loginMember(loginmember);
-		} 
-		catch (LoginErrorException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e);
+		} catch (LoginErrorException e) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("登入失敗");
 		}
+		
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 
