@@ -1,8 +1,10 @@
-package com.example.restservice;
+package com.example.restservice.Rowmapper;
 
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import com.example.restservice.Model.Commentmodel;
 
 import org.springframework.jdbc.core.RowMapper;
 

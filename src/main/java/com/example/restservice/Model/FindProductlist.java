@@ -1,6 +1,5 @@
-package com.example.restservice;
+package com.example.restservice.Model;
 import java.util.List;
-import com.example.restservice.AddProduct;
 public class FindProductlist {
     private List<AddProduct> productList;
 

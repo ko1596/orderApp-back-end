@@ -1,4 +1,4 @@
-package com.example.restservice;
+package com.example.restservice.expection;
 
 
 public class LoginErrorException extends Exception{
