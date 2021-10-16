@@ -96,8 +96,8 @@ public class MemberController {
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
-	@RequestMapping("/PostProduct")
-	public ResponseEntity PostProduct(HttpServletRequest request) {
+	@RequestMapping("/FindProduct_by_memberID")
+	public ResponseEntity FindProduct_by_memberID(HttpServletRequest request) {
 		String memberID = request.getParameter("memberID");
 		String Sellerid = memberService.Findseller(memberID);
 		List<AddProduct> collector = new ArrayList<>();
@@ -106,7 +106,26 @@ public class MemberController {
 		return ResponseEntity.status(HttpStatus.OK).body(json);
 	}
 
-
-
+	@RequestMapping("/Find_COMMENT_BY_Sellerid")
+	public ResponseEntity Find_COMMENT_BY_Sellerid(HttpServletRequest request) 
+	{
+		String Sellerid = request.getParameter("Sellerid");
+		Commentmodel commentmodel = new Commentmodel();
+		commentmodel.setSellerid(Integer.parseInt(Sellerid));
+		commentmodel.setRate(Integer.parseInt(request.getParameter("Rate")));
+		commentmodel.setDescription(request.getParameter("Description"));
+		memberService.AddComment(commentmodel);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+	
+	@RequestMapping("/Postcomment_by_Sellerid")
+	public ResponseEntity Postcomment_by_Sellerid(HttpServletRequest request) 
+	{
+		String Sellerid = request.getParameter("Sellerid");
+		List<Commentmodel> collector = new ArrayList<>();
+		collector = memberService.FindComment(Sellerid);
+		String json = new Gson().toJson(collector);
+		return ResponseEntity.status(HttpStatus.OK).body(json);
+	}
 
 }

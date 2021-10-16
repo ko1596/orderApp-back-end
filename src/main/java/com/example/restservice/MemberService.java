@@ -33,8 +33,11 @@ public class MemberService {
 		return memberDao.findALLproduList(sellerid);
 	}
 
-
-
-
-
+	public void AddComment(Commentmodel commentmodel){
+        memberDao.AddComment(commentmodel);
+	}
+	
+	public List<Commentmodel> FindComment(String sellerid){
+		return memberDao.findALLCommentList(sellerid);
+	}
 }

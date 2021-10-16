@@ -64,6 +64,18 @@ public class MemberDao {
 		return jdbcTemplate.query(sql, new ProductRowMapper());
 	}
 
+	public void AddComment(Commentmodel commentmodel)
+	{	
+		jdbcTemplate.update("INSERT INTO `project_database`.`comment` (`Sellerid` ,`Rate` , `Description`)"
+	  	+ "VALUES (?,?,?)" ,commentmodel.getSellerid(),commentmodel.getRate(), commentmodel.getDescription());	
+	}
+
+	public  List<Commentmodel> findALLCommentList(String sellerid)
+	{
+		String sql = "select * from `project_database`.`comment`  where Sellerid=" + sellerid;
+		return jdbcTemplate.query(sql, new CommentRowMapper());
+	}
+
 
 
 

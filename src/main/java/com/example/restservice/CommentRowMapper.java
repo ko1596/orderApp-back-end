@@ -13,9 +13,9 @@ public class CommentRowMapper implements RowMapper<Commentmodel>
 	public Commentmodel mapRow(ResultSet rs, int rowNum) throws SQLException 
     {
 		Commentmodel commentmodel = new Commentmodel();
-		commentmodel.setProductID(rs.getInt("Sellerid"));
-		commentmodel.setRate(rs.getInt("Price"));
-		commentmodel.setDescription(rs.getString("Name"));
+		commentmodel.setSellerid(rs.getInt("Sellerid"));
+		commentmodel.setRate(rs.getInt("Rate"));
+		commentmodel.setDescription(rs.getString("Description"));
 	
 		return commentmodel;
 	}

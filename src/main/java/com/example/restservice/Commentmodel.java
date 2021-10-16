@@ -4,16 +4,16 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class Commentmodel {
-    private int ProductID;
+    private int Sellerid;
     private int Rate;
     private String Description;
 
-    public int getProductID(){
-        return ProductID;
+    public int getSellerid(){
+        return Sellerid;
     }
       
-    public void setProductID(int ProductID) {
-        this.ProductID = ProductID;
+    public void setSellerid(int Sellerid) {
+        this.Sellerid = Sellerid;
     }
 
     public int getRate(){
