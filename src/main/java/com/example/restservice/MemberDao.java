@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import com.example.restservice.Model.AddProduct;
+import com.example.restservice.Model.Product;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
@@ -34,7 +34,7 @@ public class MemberDao {
 	  		+ "VALUES (?,?,?,?,?)" ,memberAccount.getName(),memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail());
   	}
 
-	public void AddProduct(AddProduct addProduct){	
+	public void AddProduct(Product addProduct){	
 		jdbcTemplate.update("INSERT INTO `project_database`.`product` (`Sellerid` , `Price`, `Name`, `Photo`, `Description`, `Status`, `Tag`)"
 	  	+ "VALUES (?,?,?,?,?,?,?)" ,addProduct.getSellerid(),addProduct.getPrice(), addProduct.getName(),
 	  	addProduct.getPhoto(),addProduct.getDescription(),addProduct.getStatus(),addProduct.getTag());
@@ -68,7 +68,7 @@ public class MemberDao {
 		}		
 	} 
 
-	public  List<AddProduct> findALLproduList(String sellerid)
+	public  List<Product> findALLproduList(String sellerid)
 	{
 		String sql = "select * from `project_database`.`product`  where Sellerid=" + sellerid;
 		return jdbcTemplate.query(sql, new ProductRowMapper());
@@ -85,6 +85,13 @@ public class MemberDao {
 		String sql = "select * from `project_database`.`comment`  where Sellerid=" + sellerid;
 		return jdbcTemplate.query(sql, new CommentRowMapper());
 	}
+
+	// public void ChangeMemberData(MemberAccount memberAccount)
+	// {
+	// 	String sql = "UPDATE member SET name=?, password=? , Birthday=? , Phone=? , Email=?  WHERE idMember=?;";
+	//     jdbcTemplate.update(sql,memberAccount.getName(),
+	// 	memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail(),);
+  	// }
 
 
 

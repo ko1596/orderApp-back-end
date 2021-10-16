@@ -3,7 +3,7 @@ package com.example.restservice.Model;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AddProduct {
+public class Product {
     private int Sellerid;
     private int Price;
     private String Name;

@@ -4,17 +4,17 @@ package com.example.restservice.Rowmapper;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.example.restservice.Model.AddProduct;
+import com.example.restservice.Model.Product;
 
 import org.springframework.jdbc.core.RowMapper;
 
 
-public class ProductRowMapper implements RowMapper<AddProduct>
+public class ProductRowMapper implements RowMapper<Product>
 {
     @Override
-	public AddProduct mapRow(ResultSet rs, int rowNum) throws SQLException 
+	public Product mapRow(ResultSet rs, int rowNum) throws SQLException 
     {
-		AddProduct addProduct = new AddProduct();
+		Product addProduct = new Product();
 		addProduct.setSellerid(rs.getInt("Sellerid"));
 		addProduct.setPrice(rs.getInt("Price"));
 		addProduct.setName(rs.getString("Name"));

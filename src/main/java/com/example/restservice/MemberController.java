@@ -3,7 +3,7 @@ package com.example.restservice;
 
 import javax.servlet.http.HttpServletRequest;
 
-import com.example.restservice.Model.AddProduct;
+import com.example.restservice.Model.Product;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
@@ -87,7 +87,7 @@ public class MemberController {
 	public ResponseEntity add_product(HttpServletRequest request) {
 		String memberID = request.getParameter("memberID");
 		String Sellerid = memberService.Findseller(memberID);
-		AddProduct addProduct = new AddProduct();
+		Product addProduct = new Product();
 		addProduct.setSellerid(Integer.parseInt(Sellerid));
 		addProduct.setPrice(Integer.parseInt(request.getParameter("Price")));
 		addProduct.setName(request.getParameter("Name"));
@@ -103,7 +103,7 @@ public class MemberController {
 	public ResponseEntity FindProduct_by_memberID(HttpServletRequest request) {
 		String memberID = request.getParameter("memberID");
 		String Sellerid = memberService.Findseller(memberID);
-		List<AddProduct> collector = new ArrayList<>();
+		List<Product> collector = new ArrayList<>();
 		collector = memberService.FindProduct(Sellerid);
 		String json = new Gson().toJson(collector);
 		return ResponseEntity.status(HttpStatus.OK).body(json);
@@ -130,5 +130,7 @@ public class MemberController {
 		String json = new Gson().toJson(collector);
 		return ResponseEntity.status(HttpStatus.OK).body(json);
 	}
+
+	
 
 }

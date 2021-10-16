@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.restservice.Model.AddProduct;
+import com.example.restservice.Model.Product;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
@@ -26,7 +26,7 @@ public class MemberService {
 	public String loginMember(Loginmember input)  throws LoginErrorException{
 		return memberDao.loginmember(input);
 	}
-	public void AddProduct(AddProduct addProduct){
+	public void AddProduct(Product addProduct){
         memberDao.AddProduct(addProduct);
 	}
 	public void AddSeller(Seller seller){
@@ -36,7 +36,7 @@ public class MemberService {
 	public String Findseller(String memberid){
 		return memberDao.Findseller(memberid);
 	}
-	public List<AddProduct> FindProduct(String sellerid){
+	public List<Product> FindProduct(String sellerid){
 		return memberDao.findALLproduList(sellerid);
 	}
 
