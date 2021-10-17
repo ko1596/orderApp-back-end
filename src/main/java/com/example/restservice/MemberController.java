@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.example.restservice.Model.Product;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
+import com.example.restservice.Model.LoginOutput;
 import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.Seller;
 import com.example.restservice.expection.LoginErrorException;
@@ -71,14 +72,22 @@ public class MemberController {
 
 	@PostMapping("/Login")
 	public ResponseEntity Login(@RequestBody Loginmember loginmember) {
+		
 		String result;
+		String json;
+		LoginOutput loginoutput;
+		Gson gson = new Gson();  ;
 		try {
 			result = memberService.loginMember(loginmember);
+			loginoutput = new LoginOutput(true, "登入成功", result);
+			json = gson.toJson(loginoutput);
 		} catch (LoginErrorException e) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("登入失敗");
+			loginoutput = new LoginOutput(false, "登入失敗"); 
+			json = gson.toJson(loginoutput);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(result);
+		return ResponseEntity.status(HttpStatus.OK).body(json);
 	}
 
 	@RequestMapping("/add_product")
