@@ -10,6 +10,7 @@ import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.Seller;
 import com.example.restservice.Rowmapper.CommentRowMapper;
 import com.example.restservice.Rowmapper.ProductRowMapper;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.Statement; 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,9 @@ public class MemberDao {
 	
 	public String loginmember(Loginmember input)
 	{ 
-		try{
-			String sql=" Select idMember from `project_database`.`member` where email=? and password=?";
-			return jdbcTemplate.queryForObject(sql, new Object[]{input.getemail(), input.getPassword()}, String.class);
-		}catch (DataAccessException e){
-			e.printStackTrace();   
-			return null;
-		}		
+		String sql=" Select idMember from `project_database`.`member` where email=? and password=?";
+		return jdbcTemplate.queryForObject(sql, new Object[]{input.getemail(), input.getPassword()}, String.class);
+	
 	} 
 
 	public void AddSeller(Seller seller){
@@ -85,6 +82,7 @@ public class MemberDao {
 		String sql = "select * from `project_database`.`comment`  where Sellerid=" + sellerid;
 		return jdbcTemplate.query(sql, new CommentRowMapper());
 	}
+
 
 	// public void ChangeMemberData(MemberAccount memberAccount)
 	// {

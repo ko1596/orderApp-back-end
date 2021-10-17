@@ -27,6 +27,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 @RestController
 @RequestMapping("/api")
@@ -74,10 +75,9 @@ public class MemberController {
 		String result;
 		try {
 			result = memberService.loginMember(loginmember);
-		} catch (LoginErrorException e) {
+		} catch (EmptyResultDataAccessException e) {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("登入失敗");
 		}
-		
 		return ResponseEntity.status(HttpStatus.OK).body(result);
 	}
 

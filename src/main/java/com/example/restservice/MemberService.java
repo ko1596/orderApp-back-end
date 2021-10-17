@@ -13,6 +13,7 @@ import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.Seller;
 import com.example.restservice.expection.LoginErrorException;
+import org.springframework.dao.EmptyResultDataAccessException;
 
 
 @Service
@@ -23,7 +24,7 @@ public class MemberService {
 	public void addMember(MemberAccount memberAccount){
 		memberDao.addMember(memberAccount);
 	}
-	public String loginMember(Loginmember input)  throws LoginErrorException{
+	public String loginMember(Loginmember input){
 		return memberDao.loginmember(input);
 	}
 	public void AddProduct(Product addProduct){
