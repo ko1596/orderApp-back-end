@@ -8,8 +8,11 @@ import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.Seller;
+import com.example.restservice.Model.ChangeMemberData;
 import com.example.restservice.Rowmapper.CommentRowMapper;
+import com.example.restservice.Rowmapper.MemberRowMapper;
 import com.example.restservice.Rowmapper.ProductRowMapper;
+
 import org.springframework.dao.EmptyResultDataAccessException;
 
 import java.sql.Statement; 
@@ -32,7 +35,8 @@ public class MemberDao {
 	{
 	  System.out.println("EXCUTE INSERT MEMBER");
 	  jdbcTemplate.update("INSERT INTO `project_database`.`member` (`Name`, `password`, `Birthday`, `Phone`, `Email`)"
-	  		+ "VALUES (?,?,?,?,?)" ,memberAccount.getName(),memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail());
+	  		+ "VALUES (?,?,?,?,?)" ,memberAccount.getName(),
+			memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail());
   	}
 
 	public void AddProduct(Product addProduct){	
@@ -65,6 +69,12 @@ public class MemberDao {
 		}		
 	} 
 
+	public  List<MemberAccount> findALLmember(String idMember)
+	{
+		String sql = "select * from (`project_database`.`member`)  where idMember=" + idMember;
+		return jdbcTemplate.query(sql, new MemberRowMapper());
+	}
+
 	public  List<Product> findALLproduList(String sellerid)
 	{
 		String sql = "select * from `project_database`.`product`  where Sellerid=" + sellerid;
@@ -84,12 +94,12 @@ public class MemberDao {
 	}
 
 
-	// public void ChangeMemberData(MemberAccount memberAccount)
-	// {
-	// 	String sql = "UPDATE member SET name=?, password=? , Birthday=? , Phone=? , Email=?  WHERE idMember=?;";
-	//     jdbcTemplate.update(sql,memberAccount.getName(),
-	// 	memberAccount.getPassword(),memberAccount.getBirthday(),memberAccount.getPhone(),memberAccount.getEmail(),);
-  	// }
+	public void ChangeMemberData(ChangeMemberData changeMemberData)
+	{
+		String sql = "UPDATE member SET name=?, password=? , Birthday=? , Phone=? , Email=?  WHERE idMember=?;";
+	    jdbcTemplate.update(sql,changeMemberData.getName(),
+		changeMemberData.getPassword(),changeMemberData.getBirthday(),changeMemberData.getPhone(),changeMemberData.getEmail(),changeMemberData.getidmember());
+  	}
 
 
 

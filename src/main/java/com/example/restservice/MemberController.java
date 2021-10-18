@@ -4,10 +4,12 @@ package com.example.restservice;
 import javax.servlet.http.HttpServletRequest;
 
 import com.example.restservice.Model.Product;
+import com.example.restservice.Model.ChangeMemberData;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.LoginOutput;
 import com.example.restservice.Model.MemberAccount;
+import com.example.restservice.Model.MemberOutput;
 import com.example.restservice.Model.Seller;
 import com.example.restservice.expection.LoginErrorException;
 import com.google.gson.Gson;
@@ -28,7 +30,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
-import org.springframework.dao.EmptyResultDataAccessException;
 
 @RestController
 @RequestMapping("/api")
@@ -57,6 +58,22 @@ public class MemberController {
 		memberAccount.setBirthday(request.getParameter("birthday"));
 		memberAccount.setPhone(request.getParameter("phone"));
 		memberService.addMember(memberAccount);
+
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	@RequestMapping("/Change_member")
+	public ResponseEntity Change_member(HttpServletRequest request) 
+	{
+		ChangeMemberData addchaChangeMemberData = new ChangeMemberData();
+		addchaChangeMemberData.setidmember(Integer.parseInt(request.getParameter("idmember")));
+		addchaChangeMemberData.setPassword(request.getParameter("password"));
+		addchaChangeMemberData.setName(request.getParameter("name"));
+		addchaChangeMemberData.setEmail(request.getParameter("email"));
+		addchaChangeMemberData.setBirthday(request.getParameter("birthday"));
+		addchaChangeMemberData.setPhone(request.getParameter("phone"));
+		memberService.ChangeMemberData(addchaChangeMemberData);
+		
 		return new ResponseEntity(HttpStatus.OK);
 	}
 
@@ -73,16 +90,16 @@ public class MemberController {
 
 	@PostMapping("/Login")
 	public ResponseEntity Login(@RequestBody Loginmember loginmember) {
-		
+
 		String result;
 		String json;
 		LoginOutput loginoutput;
-		Gson gson = new Gson();  ;
+		Gson gson = new Gson();  
 		try {
 			result = memberService.loginMember(loginmember);
 			loginoutput = new LoginOutput(true, "登入成功", result);
 			json = gson.toJson(loginoutput);
-		} catch (LoginErrorException e) {
+		} catch (EmptyResultDataAccessException e) {
 			loginoutput = new LoginOutput(false, "登入失敗"); 
 			json = gson.toJson(loginoutput);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
@@ -139,6 +156,25 @@ public class MemberController {
 		return ResponseEntity.status(HttpStatus.OK).body(json);
 	}
 
-	
-
+	@RequestMapping("/Findmember_by_idmember")
+	public ResponseEntity Findmember_by_idmember(HttpServletRequest request) 
+	{
+		MemberOutput memberOutput;
+		String json;
+		String idmember = request.getParameter("idmember");
+		Gson gson = new Gson(); 
+		List<MemberAccount> collector = new ArrayList<>();
+		collector = memberService.findALLmember(idmember);
+		if (collector.size() !=0 ){
+			memberOutput = new MemberOutput(true,collector);
+			json = gson.toJson(memberOutput);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+		}
+		else{
+			memberOutput = new MemberOutput(false,"找不到資料");
+			json = gson.toJson(memberOutput);
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+		}
+		
+	}
 }

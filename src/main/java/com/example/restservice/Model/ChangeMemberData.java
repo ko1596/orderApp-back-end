@@ -9,7 +9,16 @@ public class ChangeMemberData {
     private String Birthday;
     private String Phone;
     private String Email;
+    private int idmember;
 
+
+    public int getidmember() {
+        return idmember;
+    }
+    
+    public void setidmember(int idmember) {
+        this.idmember = idmember;
+    }
 
     public String getEmail() {
         return Email;

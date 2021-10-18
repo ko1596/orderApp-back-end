@@ -4,11 +4,22 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class MemberAccount {
+  private int idmember;
   private String Name;
   private String password;
   private String Birthday;
   private String Phone;
   private String Email;
+
+  public int getidmember() {
+    return idmember;
+    }
+    
+    public void setidmember(int idmember) {
+      this.idmember = idmember;
+    }
+
+
 
   public String getEmail() {
 	return Email;

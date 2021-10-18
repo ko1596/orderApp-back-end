@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.example.restservice.Model.Product;
+import com.example.restservice.Model.ChangeMemberData;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
@@ -47,5 +48,13 @@ public class MemberService {
 	
 	public List<Commentmodel> FindComment(String sellerid){
 		return memberDao.findALLCommentList(sellerid);
+	}
+
+	public void ChangeMemberData(ChangeMemberData changeMemberData){
+		memberDao.ChangeMemberData(changeMemberData);
+	}
+
+	public List<MemberAccount> findALLmember(String idmember){
+		return memberDao.findALLmember(idmember);
 	}
 }
