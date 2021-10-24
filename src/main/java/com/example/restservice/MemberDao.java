@@ -8,6 +8,7 @@ import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.Seller;
+import com.example.restservice.Model.Shop_Cart;
 import com.example.restservice.Model.ChangeMemberData;
 import com.example.restservice.Rowmapper.CommentRowMapper;
 import com.example.restservice.Rowmapper.MemberRowMapper;
@@ -101,7 +102,18 @@ public class MemberDao {
 		changeMemberData.getPassword(),changeMemberData.getBirthday(),changeMemberData.getPhone(),changeMemberData.getEmail(),changeMemberData.getidmember());
   	}
 
+	  public  List<Product> findProduct_by_ProductID(String Productid)
+	  {
+		  String sql = "select * from `project_database`.`product`  where ProductID=" + Productid;
+		  return jdbcTemplate.query(sql, new ProductRowMapper());
+	  }
 
+	public void addShop_Cart(Shop_Cart shop_Cart)
+	{
+		jdbcTemplate.update("INSERT INTO `project_database`.`Shop_Cart` (`idmember` ,`quantity` , `ProductID`)"
+		+ "VALUES (?,?,?)" ,shop_Cart.getidMember(),shop_Cart.getquantity(), shop_Cart.getProductID());
+	}
 
+	
 
 }

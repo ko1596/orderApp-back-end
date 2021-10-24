@@ -12,6 +12,7 @@ import com.example.restservice.Model.ChangeMemberData;
 import com.example.restservice.Model.Commentmodel;
 import com.example.restservice.Model.Loginmember;
 import com.example.restservice.Model.MemberAccount;
+import com.example.restservice.Model.Shop_Cart;
 import com.example.restservice.Model.Seller;
 import com.example.restservice.expection.LoginErrorException;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -57,4 +58,14 @@ public class MemberService {
 	public List<MemberAccount> findALLmember(String idmember){
 		return memberDao.findALLmember(idmember);
 	}
+
+	public List<Product> FindProduct_by_Productid(String Productid)
+	{
+		return memberDao.findProduct_by_ProductID(Productid);
+	}
+
+	public void addShop_Cart(Shop_Cart shop_Cart){
+		memberDao.addShop_Cart(shop_Cart);
+	}
+
 }

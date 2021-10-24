@@ -11,6 +11,8 @@ import com.example.restservice.Model.LoginOutput;
 import com.example.restservice.Model.MemberAccount;
 import com.example.restservice.Model.MemberOutput;
 import com.example.restservice.Model.Seller;
+//import com.example.restservice.Model.AddProduct_to_Cart;
+import com.example.restservice.Model.Shop_Cart;
 import com.example.restservice.expection.LoginErrorException;
 import com.google.gson.Gson;
 
@@ -175,6 +177,53 @@ public class MemberController {
 			json = gson.toJson(memberOutput);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
 		}
-		
 	}
+
+	@RequestMapping("/Findmproduct_by_ProductID")
+	public ResponseEntity Findmproduct_by_ProductID(HttpServletRequest request) 
+	{
+		String ProductID = request.getParameter("ProductID");
+		List<Product> collector = new ArrayList<>();
+		collector = memberService.FindProduct_by_Productid(ProductID);
+		String json = new Gson().toJson(collector);
+		return ResponseEntity.status(HttpStatus.OK).body(json);
+	}
+
+	@RequestMapping("/add_Shop_Cart")
+	public ResponseEntity add_Shop_Order(HttpServletRequest request) {
+		Shop_Cart shop_Cart = new Shop_Cart();
+		String ProductID = request.getParameter("ProductID");
+		shop_Cart.setidMember(Integer.parseInt(request.getParameter("idMember")));
+		shop_Cart.setProductID(Integer.parseInt(ProductID));
+		shop_Cart.setquantity(Integer.parseInt(request.getParameter("quantity")));
+		List<Product> collector = new ArrayList<>();
+		collector = memberService.FindProduct_by_Productid(ProductID);
+		shop_Cart.setProductList(collector);
+		memberService.addShop_Cart(shop_Cart);
+		return new ResponseEntity(HttpStatus.OK);
+	}
+
+	// @RequestMapping("/add_Product_Shop_Cart")
+	// public ResponseEntity add_Product_Shop_Cart(HttpServletRequest request) 
+	// {
+	// 	AddProduct_to_Cart addProduct_to_Cart;
+	// 	String json;
+	// 	String idmember = request.getParameter("idmember");
+	// 	String ProductID = request.getParameter("ProductID");
+	// 	int  quantity =  Integer.parseInt(request.getParameter("quantity"));
+	// 	Gson gson = new Gson(); 
+	// 	List<Product> collector = new ArrayList<>();
+	// 	collector = memberService.FindProduct_by_Productid(ProductID);
+	// 	if ( quantity > 0 ){
+	// 		addProduct_to_Cart = new AddProduct_to_Cart(true,collector,"已加入購物車");
+	// 		json = gson.toJson(addProduct_to_Cart);
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+	// 	}
+	// 	else{
+	// 		addProduct_to_Cart = new AddProduct_to_Cart(false,"加入失敗");
+	// 		json = gson.toJson(addProduct_to_Cart);
+	// 		return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(json);
+	// 	}
+	// }
+
 }
